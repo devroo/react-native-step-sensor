@@ -1,28 +1,27 @@
-package com.stepcounter
+package com.stepsensor
 
 import com.facebook.proguard.annotations.DoNotStrip
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.module.annotations.ReactModule
 
-//import com.facebook.react.module.annotations.ReactModule
-
-//@ReactModule(name = "StepCounter")
-abstract class StepCounterSpec internal constructor(context: ReactApplicationContext) :
+@ReactModule(name = "StepSensor")
+abstract class StepSensorSpec internal constructor(context: ReactApplicationContext) :
     ReactContextBaseJavaModule(context) {
 
     @ReactMethod
     @DoNotStrip
-    abstract fun isStepCountingSupported(promise: Promise)
+    abstract fun isStepSensorSupported(promise: Promise)
 
     @ReactMethod
     @DoNotStrip
-    abstract fun startStepCounterUpdate(from: Double)
+    abstract fun startStepSensorUpdate(from: Double)
 
     @ReactMethod
     @DoNotStrip
-    abstract fun stopStepCounterUpdate()
+    abstract fun stopStepSensorUpdate()
 
     @ReactMethod
     @DoNotStrip

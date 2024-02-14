@@ -10,13 +10,13 @@ import androidx.annotation.RequiresApi
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.LifecycleEventListener
 import com.facebook.react.bridge.WritableMap
-import com.stepsensor.StepCounterModule
+import com.stepsensor.StepSensorModule
 
 /**
  * the base class for sensor listen service
- * @param counterModule the step counter module
+ * @param counterModule the step sensor module
  * @param sensorManager the sensor manager
- * @see StepCounterModule
+ * @see StepSensorModule
  * @see Sensor
  * @see SensorEvent
  * @see <a href="https://developer.android.com/reference/android/hardware/SensorEventListener">SensorEventListener</a>
@@ -25,13 +25,13 @@ import com.stepsensor.StepCounterModule
  * @see <a href="https://github.com/facebook/react-native/blob/main/ReactAndroid/src/main/java/com/facebook/react/bridge/LifecycleEventListener.java">LifecycleEventListener: original file</a>
  */
 abstract class SensorListenService(
-    private val counterModule: StepCounterModule, private val sensorManager: SensorManager
+    private val counterModule: StepSensorModule, private val sensorManager: SensorManager
 ) : SensorEventListener, LifecycleEventListener {
     /**
      * the accelerometer sensor type
      * [TYPE_ACCELEROMETER][Sensor.TYPE_ACCELEROMETER]: 1<br/>
      *
-     * the step counter sensor type
+     * the step sensor sensor type
      * [TYPE_STEP_COUNTER][Sensor.TYPE_STEP_COUNTER]: 19<br/>
      */
     abstract val sensorType: Int
@@ -73,8 +73,8 @@ abstract class SensorListenService(
      * @return if the [sensor][detectedSensor] is
      * [accelerometer][Sensor.TYPE_ACCELEROMETER],
      * "Accelerometer"
-     * if it's [stepCounter][Sensor.TYPE_STEP_COUNTER],
-     * "Step Counter".
+     * if it's [stepSensor][Sensor.TYPE_STEP_COUNTER],
+     * "Step Sensor".
      */
     abstract val sensorTypeString: String
 
@@ -205,7 +205,7 @@ abstract class SensorListenService(
      * @param event the [SensorEvent][android.hardware.SensorEvent].
      * @see <a href="https://developer.android.com/reference/android/hardware/SensorEvent">Hardware Activity Sensors</a>
      * @see <a href="https://developer.android.com/reference/android/hardware/SensorEvent#sensor.type_accelerometer:">Accelerometer Sensor Event</a>
-     * @see <a href="https://developer.android.com/reference/android/hardware/Sensor#TYPE_STEP_COUNTER">Step Counter Sensor Event</a>
+     * @see <a href="https://developer.android.com/reference/android/hardware/Sensor#TYPE_STEP_COUNTER">Step Sensor Event</a>
      * @see <a href="https://developer.android.com/reference/android/hardware/Sensor#REPORTING_MODE_ON_CHANGE">Reporting Mode On Change</a>
      */
     override fun onSensorChanged(event: SensorEvent?) {
@@ -213,13 +213,13 @@ abstract class SensorListenService(
             return
         }
         if (updateCurrentSteps(event.values)) {
-            counterModule.sendDeviceEvent("stepCounterUpdate", stepsParamsMap)
+            counterModule.sendDeviceEvent("stepSensorUpdate", stepsParamsMap)
         }
     }
 
     /**
      * abstract method to update the current steps
-     * implemented in [StepCounterService] and [AccelerometerService]
+     * implemented in [StepSensorService] and [AccelerometerService]
      * with different motion sensor handling algorithm.
      * @param eventData the detected vector of sensor event
      * @return if the current steps is updated, return true, otherwise return false

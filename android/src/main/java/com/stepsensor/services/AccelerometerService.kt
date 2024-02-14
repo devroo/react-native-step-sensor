@@ -3,7 +3,7 @@ package com.stepsensor.services
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.util.Log
-import com.stepsensor.StepCounterModule
+import com.stepsensor.StepSensorModule
 import com.stepsensor.utils.SensorFusionMath.dot
 import com.stepsensor.utils.SensorFusionMath.norm
 import com.stepsensor.utils.SensorFusionMath.normalize
@@ -33,12 +33,12 @@ import kotlin.math.min
  * @see SensorListenService
  * @see Sensor
  * @see SensorManager
- * @see StepCounterModule
+ * @see StepSensorModule
  * @see SensorManager.SENSOR_DELAY_NORMAL
  * @see Sensor.TYPE_ACCELEROMETER
  */
 class AccelerometerService(
-    counterModule: StepCounterModule, sensorManager: SensorManager
+    counterModule: StepSensorModule, sensorManager: SensorManager
 ) : SensorListenService(counterModule, sensorManager) {
     override val sensorTypeString = "Accelerometer"
     override val sensorType = Sensor.TYPE_ACCELEROMETER

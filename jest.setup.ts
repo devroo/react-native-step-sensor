@@ -10,8 +10,8 @@ beforeEach(() => {
     isSupported: jest.fn(),
     startObserving: jest.fn(),
     stopObserving: jest.fn(),
-    isStepCountingSupported: jest.fn(),
-    stopStepCounterUpdate: jest.fn(),
+    isStepSensorSupported: jest.fn(),
+    stopStepSensorUpdate: jest.fn(),
     addListener: jest.fn((_eventName: string) => console.debug),
     removeListeners: jest.fn((_count: number) => console.debug),
   });

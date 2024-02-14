@@ -2,8 +2,8 @@ import type { TurboModule } from 'react-native';
 import { TurboModuleRegistry } from 'react-native';
 
 /**
- * `StepCountData` is an object with four properties: `distance`, `steps`, `startDate`, and `endDate`.
- * StepCountData object - The Object that contains the step count data.
+ * `StepSensorData` is an object with four properties: `distance`, `steps`, `startDate`, and `endDate`.
+ * StepSensorData object - The Object that contains the step count data.
  * counterType - The type of counter used to count the steps.
  * steps - The number of steps taken during the time period.
  * startDate - The start date of the data.
@@ -12,7 +12,7 @@ import { TurboModuleRegistry } from 'react-native';
  * floorsAscended - number of floors ascended (iOS only)
  * floorsDescended - number of floors descended (iOS only)
  */
-export type StepCountData = {
+export type StepSensorData = {
   counterType: string; // 'STEP_COUNTER'|'ACCELEROMETER'|'CMPedometer'
   steps: number; // number of steps
   startDate: number; // Unix timestamp in milliseconds (long)
@@ -24,7 +24,7 @@ export type StepCountData = {
 
 export const NAME = 'StepSensor';
 export const VERSION = '0.0.5';
-export const eventName = 'StepSensor.stepCounterUpdate';
+export const eventName = 'StepSensor.stepSensorUpdate';
 
 export interface Spec extends TurboModule {
   /**
@@ -36,22 +36,22 @@ export interface Spec extends TurboModule {
    * granted - The permission is granted or not.
    * supported - The step counter is supported or not.
    * @example
-   * isStepCountingSupported().then((response) => {
+   * isStepSensorSupported().then((response) => {
    *   const { granted, supported } = response;
-   *   setStepCountingSupported(supported);
-   *   setStepCountingGranted(granted);
+   *   setStepSensorSupported(supported);
+   *   setStepSensorGranted(granted);
    * });
    */
-  isStepCountingSupported(): Promise<Record<string, boolean>>;
+  isStepSensorSupported(): Promise<Record<string, boolean>>;
   /**
    * @param {number} from the current time obtained by `new Date()` in milliseconds.
    */
-  startStepCounterUpdate(from: number): void;
+  startStepSensorUpdate(from: number): void;
   /**
    * Stop updating the step count data.
-   * Removes all the listeners that were registered with `startStepCounterUpdate`.
+   * Removes all the listeners that were registered with `startStepSensorUpdate`.
    */
-  stopStepCounterUpdate(): void;
+  stopStepSensorUpdate(): void;
 
   /* Required Methods for NativeEventEmitter */
   addListener(eventName: string): void;

@@ -2,28 +2,28 @@ package com.stepsensor.services
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
-import com.stepsensor.StepCounterModule
+import com.stepsensor.StepSensorModule
 import java.util.concurrent.TimeUnit
 
 /**
- * This class is responsible for listening to the step counter sensor.
+ * This class is responsible for listening to the step sensor.
  * It is used to count the steps of the user.
  * @param counterModule The module that is responsible for the communication with the react-native layer
  * @param sensorManager The sensor manager that is responsible for the sensor
  * @property sensorType The type of the sensor always Sensor.TYPE_STEP_COUNTER
- * @property sensorTypeString The type of the sensor as a string. so always "Step Counter"
+ * @property sensorTypeString The type of the sensor as a string. so always "Step Sensor"
  * @property sensorDelay The integer enum value of delay of the sensor.
  *   choose between SensorManager.SENSOR_DELAY_NORMAL or SensorManager.SENSOR_DELAY_UI
  * @property detectedSensor The sensor that is detected
  * @property previousSteps The initial steps or the previous steps.
- *   step counter sensor is recording since the last reboot.
+ *   step sensor is recording since the last reboot.
  *   so if previous step is null, we need to initialize the previous steps with the current steps minus 1.
  * @property currentSteps The current steps
- * @constructor Creates a new StepCounterService
+ * @constructor Creates a new StepSensorService
  * @see SensorListenService
  * @see Sensor
  * @see SensorManager
- * @see StepCounterModule
+ * @see StepSensorModule
  * @see TimeUnit
  * @see SensorManager.SENSOR_DELAY_NORMAL
  * @see Sensor.TYPE_STEP_COUNTER
@@ -31,11 +31,11 @@ import java.util.concurrent.TimeUnit
  * @see SensorListenService.updateCurrentSteps
  * @see TimeUnit.NANOSECONDS.toMillis
  */
-class StepCounterService(
-    counterModule: StepCounterModule,
+class StepSensorService(
+    counterModule: StepSensorModule,
     sensorManager: SensorManager
 ) : SensorListenService(counterModule, sensorManager) {
-    override val sensorTypeString = "Step Counter"
+    override val sensorTypeString = "Step Sensor"
     override val sensorType = Sensor.TYPE_STEP_COUNTER
     override val detectedSensor: Sensor = sensorManager.getDefaultSensor(sensorType)!!
     private var previousSteps: Double = 0.0
@@ -53,7 +53,7 @@ class StepCounterService(
 
     /**
      * This function is responsible for updating the current steps.
-     * @param [eventData][FloatArray(1) values][android.hardware.SensorEvent.values] The step counter event data
+     * @param [eventData][FloatArray(1) values][android.hardware.SensorEvent.values] The step sensor event data
      * @return The current steps
      * @see android.hardware.SensorEvent
      * @see android.hardware.SensorEvent.values

@@ -1,6 +1,6 @@
 buildscript {
     // Buildscript is evaluated before everything else so we can't use getExtOrDefault
-    def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["StepCounter_kotlinVersion"]
+    def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["StepSensor_kotlinVersion"]
 
     repositories {
         google()
@@ -9,7 +9,6 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:7.4.1"
-//        classpath("com.facebook.react:react-native-gradle-plugin")
         // noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -43,11 +42,11 @@ if (isNewArchitectureEnabled()) {
 }
 
 def getExtOrDefault(name) {
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties["StepCounter_" + name]
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties["StepSensor_" + name]
 }
 
 def getExtOrIntegerDefault(name) {
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["StepCounter_" + name]).toInteger()
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["StepSensor_" + name]).toInteger()
 }
 
 def supportsNamespace() {
@@ -65,7 +64,7 @@ def supportsNamespace() {
 
 android {
     if (supportsNamespace()) {
-        namespace "com.stepcounter"
+        namespace "com.stepsensor"
 
         sourceSets {
             main {
@@ -132,7 +131,7 @@ dependencies {
 if (isNewArchitectureEnabled()) {
     react {
         jsRootDir = file("../src/")
-        libraryName = "StepCounter"
-        codegenJavaPackageName = "com.stepcounter"
+        libraryName = "StepSensor"
+        codegenJavaPackageName = "com.stepsensor"
     }
 }

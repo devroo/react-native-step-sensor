@@ -15,7 +15,7 @@ import java.util.HashMap
  * @see ReactModuleInfo
  * @see ReactModuleInfoProvider
  */
-class StepCounterPackage : TurboReactPackage() {
+class StepSensorPackage : TurboReactPackage() {
     /**
      * This method is responsible for the creation of the ReactNative module.
      * @param name The name of the module
@@ -23,11 +23,11 @@ class StepCounterPackage : TurboReactPackage() {
      * @return [com.facebook.react.module.model.ReactModuleInfo] ]The ReactNative module
      * @see NativeModule
      * @see ReactApplicationContext
-     * @see StepCounterModule
-     * @see StepCounterModule.NAME
+     * @see StepSensorModule
+     * @see StepSensorModule.NAME
      */
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-        return if (name == StepCounterModule.NAME) StepCounterModule(reactContext) else null
+        return if (name == StepSensorModule.NAME) StepSensorModule(reactContext) else null
     }
 
     /**
@@ -45,16 +45,16 @@ class StepCounterPackage : TurboReactPackage() {
     override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
         return ReactModuleInfoProvider {
             val moduleInfo: MutableMap<String, ReactModuleInfo> = HashMap()
-//            val isTurboModule: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
-//            moduleInfo[StepCounterModule.NAME] = ReactModuleInfo(
-//                StepCounterModule.NAME,
-//                StepCounterModule.NAME,
-//                false, // canOverrideExistingModule
-//                false, // needsEagerInit
-//                true, // hasConstants
-//                false, // isCxxModule
-//                isTurboModule // isTurboModule
-//            )
+            val isTurboModule: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
+            moduleInfo[StepSensorModule.NAME] = ReactModuleInfo(
+                StepSensorModule.NAME,
+                StepSensorModule.NAME,
+                false, // canOverrideExistingModule
+                false, // needsEagerInit
+                true, // hasConstants
+                false, // isCxxModule
+                isTurboModule // isTurboModule
+            )
             moduleInfo
         }
     }
