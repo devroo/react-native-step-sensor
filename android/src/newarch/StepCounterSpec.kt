@@ -3,8 +3,7 @@ package com.stepcounter
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 
-abstract class StepCounterSpec internal constructor(context: ReactApplicationContext) :
-    NativeStepCounterSpec(context) {
+abstract class StepCounterSpec internal constructor(context: ReactApplicationContext) : NativeStepCounterSpec(context) {
     override fun getName(): String = "StepCounter"
 
     abstract override fun isStepCountingSupported(promise: Promise)

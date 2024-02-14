@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-step-sensor": ["./src/index"]
+      "@dongminyu/react-native-step-counter": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

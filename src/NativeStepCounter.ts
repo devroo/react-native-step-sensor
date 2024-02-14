@@ -22,9 +22,9 @@ export type StepCountData = {
   floorsDescended?: number; // number of floors descended (iOS only)
 };
 
-export const NAME = 'StepCounter';
-export const VERSION = '0.2.3';
-export const eventName = 'StepCounter.stepCounterUpdate';
+export const NAME = 'StepSensor';
+export const VERSION = '0.0.5';
+export const eventName = 'StepSensor.stepCounterUpdate';
 
 export interface Spec extends TurboModule {
   /**
@@ -59,4 +59,4 @@ export interface Spec extends TurboModule {
 }
 
 /* Getting enforcing the module from the registry. */
-export default TurboModuleRegistry.getEnforcing<Spec>('StepCounter') as Spec;
+export default TurboModuleRegistry.getEnforcing<Spec>('StepSensor') as Spec;

@@ -5,7 +5,7 @@ import { eventName, VERSION, NAME } from './NativeStepCounter';
 
 /* A way to check if the module is linked. */
 const LINKING_ERROR =
-  "The package 'react-native-step-sensor' doesn't seem to be linked. Make sure: \n\n" +
+  "The package '@dongminyu/react-native-step-counter' doesn't seem to be linked. Make sure: \n\n" +
   Platform.select({
     ios: '- You have run `pod install` in the `ios` directory and then clean, rebuild and re-run the app. You may also need to re-open Xcode to get the new pods.\n',
     android:
@@ -18,19 +18,19 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n' +
   'If none of these fix the issue, please open an issue on the Github repository: ' +
-  'https://github.com/devroo/react-native-step-sensor`';
+  'https://github.com/AndrewDongminYoo/react-native-step-counter`';
 
-export interface ParsedStepCountData {
-  dailyGoal: string;
-  steps: number;
-  stepsString: string;
-  calories: string;
-  startDate: string;
-  endDate: string;
-  startDateStr: string;
-  endDateStr: string;
-  distance: string;
-}
+  export interface ParsedStepCountData {
+    dailyGoal: string;
+    steps: number;
+    stepsString: string;
+    calories: string;
+    startDate: string;
+    endDate: string;
+    startDateStr: string;
+    endDateStr: string;
+    distance: string;
+  }
 
 /**
  * We keep TurboModuleManager alive until the JS VM is deleted.
@@ -50,12 +50,11 @@ const isTurboModuleEnabled = global.__turboModuleProxy != null;
  * TurboModules are enabled. If TurboModules are not enabled, it falls back to using the
  * `NativeModules.StepCounter` module. This allows the code to work with both TurboModules and
  * non-TurboModules environments.
- * https://github.com/devroo/react-native-step-sensor/issues/29#issue-1857677086
+ * https://github.com/AndrewDongminYoo/react-native-step-counter/issues/29#issue-1857677086
  */
-// const StepCounterModule = isTurboModuleEnabled
-//   ? require('./NativeStepCounter').default
-//   : NativeModules.StepCounter;
-const StepCounterModule = NativeModules.StepCounter;
+const StepCounterModule = isTurboModuleEnabled
+  ? require('./NativeStepCounter').default
+  : NativeModules.StepCounter;
 
 /**
  * A module that allows you to get the step count data.
@@ -65,7 +64,7 @@ const StepCounterModule = NativeModules.StepCounter;
  * counterType - The type of counter used to count the steps.
  * @throws {Error} LINKING_ERROR - Throws Error If global variable turboModuleProxy is undefined.
  * @example
- * import { StepCounter } from 'react-native-step-sensor';
+ * import { StepCounter } from '@dongminyu/react-native-step-counter';
  */
 const StepCounter = (
   StepCounterModule
