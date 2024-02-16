@@ -265,7 +265,7 @@ abstract class SensorListenService(
      * @see Activity.onDestroy
      */
     override fun onHostDestroy() {
-        this.stopService()
+//        this.stopService()
     }
 
     companion object {
