@@ -1,14 +1,14 @@
 #import <CoreMotion/CoreMotion.h>
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
-#import "StepCounter.h"
+#import "StepSensor.h"
 #import "SOMotionDetecter.h"
 
-@interface StepCounter ()
+@interface StepSensor ()
 @property (nonatomic, readonly) CMPedometer *pedometer;
 @end
 
-@implementation StepCounter
+@implementation StepSensor
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
@@ -19,25 +19,25 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[
-        @"StepCounter.stepCounterUpdate",
-        @"StepCounter.stepDetected",
-        @"StepCounter.errorOccurred",
-        @"StepCounter.stepsSensorInfo"
+        @"StepSensor.stepSensorUpdate",
+        @"StepSensor.stepDetected",
+        @"StepSensor.errorOccurred",
+        @"StepSensor.stepsSensorInfo"
     ];
 }
 
-RCT_EXPORT_METHOD(isStepCountingSupported:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(isStepSensorSupported:(RCTPromiseResolveBlock)resolve
                                    reject:(RCTPromiseRejectBlock)reject) {
 
     resolve(@{
         @"granted": @(self.authorizationStatus),
         @"supported": @([CMPedometer isStepCountingAvailable]),
     });
-    [self sendEventWithName:@"StepCounter.stepsSensorInfo"
+    [self sendEventWithName:@"StepSensor.stepsSensorInfo"
                        body:[self dictionaryAboutSensorInfo]];
 }
 
-RCT_EXPORT_METHOD(queryStepCounterDataBetweenDates:(NSDate *)startDate
+RCT_EXPORT_METHOD(queryStepSensorDataBetweenDates:(NSDate *)startDate
                   endDate:(NSDate *)endDate
                   handler:(RCTResponseSenderBlock)handler) {
     [self.pedometer queryPedometerDataFromDate:startDate
@@ -48,14 +48,14 @@ RCT_EXPORT_METHOD(queryStepCounterDataBetweenDates:(NSDate *)startDate
     }];
 }
 
-RCT_EXPORT_METHOD(startStepCounterUpdate:(NSDate *)date) {
+RCT_EXPORT_METHOD(startStepSensorUpdate:(NSDate *)date) {
     [self.pedometer startPedometerUpdatesFromDate:date?:[NSDate date]
                                       withHandler:^(CMPedometerData *pedometerData, NSError *error) {
         if(error) {
-            [self sendEventWithName:@"StepCounter.errorOccurred"
+            [self sendEventWithName:@"StepSensor.errorOccurred"
                                body:error];
         } else if (pedometerData) {
-            [self sendEventWithName:@"StepCounter.stepCounterUpdate"
+            [self sendEventWithName:@"StepSensor.stepSensorUpdate"
                                body:[self dictionaryFromPedometerData:pedometerData]];
         }
     }];
@@ -87,7 +87,7 @@ RCT_EXPORT_METHOD(startStepCounterUpdate:(NSDate *)date) {
     };
 }
 
-RCT_EXPORT_METHOD(stopStepCounterUpdate) {
+RCT_EXPORT_METHOD(stopStepSensorUpdate) {
     [self.pedometer stopPedometerUpdates];
     [[SOMotionDetecter sharedInstance] stopDetection];
 }
@@ -96,10 +96,10 @@ RCT_EXPORT_METHOD(startStepsDetection) {
     [[SOMotionDetecter sharedInstance]
       startDetectionWithUpdateBlock:^(NSError *error) {
         if(error) {
-            [self sendEventWithName:@"StepCounter.errorOccurred"
+            [self sendEventWithName:@"StepSensor.errorOccurred"
                                body:error];
         } else {
-            [self sendEventWithName:@"StepCounter.stepDetected"
+            [self sendEventWithName:@"StepSensor.stepDetected"
                                body:@true];
         }
     }];
@@ -131,7 +131,7 @@ RCT_EXPORT_METHOD(startStepsDetection) {
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
 (const facebook::react::ObjCTurboModule::InitParams &)params
 {
-    return std::make_shared<facebook::react::NativeStepCounterSpecJSI>(params);
+    return std::make_shared<facebook::react::NativeStepSensorSpecJSI>(params);
 }
 #endif
 
