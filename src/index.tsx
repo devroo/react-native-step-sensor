@@ -164,6 +164,7 @@ export function startStepSensorUpdate(
   if (!StepSensor.startStepSensorUpdate) {
     throw new UnavailabilityError(NAME, eventName);
   }
+
   const from = start.getTime();
   StepSensor.startStepSensorUpdate(from);
   return StepEventEmitter.addListener(eventName, callBack);

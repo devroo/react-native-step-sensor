@@ -37,7 +37,7 @@ RCT_EXPORT_METHOD(isStepSensorSupported:(RCTPromiseResolveBlock)resolve
                        body:[self dictionaryAboutSensorInfo]];
 }
 
-RCT_EXPORT_METHOD(queryStepSensorDataBetweenDates:(NSDate *)startDate
+RCT_EXPORT_METHOD(queryStepCounterDataBetweenDates:(NSDate *)startDate
                   endDate:(NSDate *)endDate
                   handler:(RCTResponseSenderBlock)handler) {
     [self.pedometer queryPedometerDataFromDate:startDate
@@ -131,7 +131,7 @@ RCT_EXPORT_METHOD(startStepsDetection) {
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
 (const facebook::react::ObjCTurboModule::InitParams &)params
 {
-    return std::make_shared<facebook::react::NativeStepSensorSpecJSI>(params);
+    return std::make_shared<facebook::react::NativeStepCounterSpecJSI>(params);
 }
 #endif
 
