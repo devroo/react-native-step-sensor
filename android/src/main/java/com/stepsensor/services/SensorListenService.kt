@@ -168,7 +168,7 @@ abstract class SensorListenService(
      */
     fun startService() {
         counterModule.sendDeviceEvent("stepsSensorInfo", stepsSensorInfo)
-        Log.d(TAG_NAME, "SensorManager.stepsSensorInfo: $stepsSensorInfo")
+        // Log.d(TAG_NAME, "SensorManager.stepsSensorInfo: $stepsSensorInfo")
         sensorManager.registerListener(this, detectedSensor, samplingPeriodUs)
     }
 
@@ -179,7 +179,7 @@ abstract class SensorListenService(
      * @see SensorManager.unregisterListener
      */
     fun stopService() {
-        Log.d(TAG_NAME, "SensorListenService.stopService")
+        // Log.d(TAG_NAME, "SensorListenService.stopService")
         sensorManager.unregisterListener(this)
     }
 
@@ -238,8 +238,8 @@ abstract class SensorListenService(
      * `SensorManager.SENSOR_STATUS_*`
      */
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        Log.d(TAG_NAME, "onAccuracyChanged.accuracy $accuracy")
-        Log.d(TAG_NAME, "onAccuracyChanged.sensor: $sensor")
+        // Log.d(TAG_NAME, "onAccuracyChanged.accuracy $accuracy")
+        // Log.d(TAG_NAME, "onAccuracyChanged.sensor: $sensor")
     }
 
     /**

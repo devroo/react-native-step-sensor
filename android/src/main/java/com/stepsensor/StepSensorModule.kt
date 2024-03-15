@@ -83,9 +83,9 @@ class StepSensorModule internal constructor(context: ReactApplicationContext) :
      */
     @ReactMethod
     override fun isStepSensorSupported(promise: Promise) {
-        Log.d(TAG_NAME, "hardware_step_counter? $supported")
-        Log.d(TAG_NAME, "step_counter granted? $stepsOK")
-        Log.d(TAG_NAME, "accelerometer granted? $accelOK")
+        // Log.d(TAG_NAME, "hardware_step_counter? $supported")
+        // Log.d(TAG_NAME, "step_counter granted? $stepsOK")
+        // Log.d(TAG_NAME, "accelerometer granted? $accelOK")
         sendDeviceEvent("stepDetected", walkingStatus)
         promise.resolve(
             Arguments.createMap().apply {
@@ -107,7 +107,7 @@ class StepSensorModule internal constructor(context: ReactApplicationContext) :
         } else {
             AccelerometerService(this, sensorManager)
         }
-        Log.d(TAG_NAME, "startStepSensorUpdate")
+        // Log.d(TAG_NAME, "startStepSensorUpdate")
         stepSensorListener!!.startService()
     }
 
@@ -117,7 +117,7 @@ class StepSensorModule internal constructor(context: ReactApplicationContext) :
      */
     @ReactMethod
     override fun stopStepSensorUpdate() {
-        Log.d(TAG_NAME, "stopStepSensorUpdate")
+        // Log.d(TAG_NAME, "stopStepSensorUpdate")
         stepSensorListener!!.stopService()
     }
 
@@ -159,7 +159,7 @@ class StepSensorModule internal constructor(context: ReactApplicationContext) :
                 .emit("$NAME.$eventType", eventPayload)
         } catch (e: RuntimeException) {
             e.message?.let { Log.e(TAG_NAME, it) }
-            Log.e(TAG_NAME, eventType, e)
+            // Log.e(TAG_NAME, eventType, e)
         }
     }
 }

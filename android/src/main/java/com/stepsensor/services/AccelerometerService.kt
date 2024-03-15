@@ -99,7 +99,7 @@ class AccelerometerService(
             velocityEstimate > STEP_THRESHOLD && oldVelocityEstimate <= STEP_THRESHOLD && timeNs - lastStepTimeNs > STEP_DELAY_NS
         if (isWalkingOrRunning) {
             currentSteps = currentSteps.plus(1)
-            Log.d(TAG_NAME, "STATUS: $currentSteps steps. TIMESTAMP: $timeNs")
+            // Log.d(TAG_NAME, "STATUS: $currentSteps steps. TIMESTAMP: $timeNs")
             lastStepTimeNs = timeNs
         }
         oldVelocityEstimate = velocityEstimate
