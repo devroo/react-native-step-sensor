@@ -21,13 +21,13 @@ object AndroidVersionHelper {
 
     @RequiresFeature(name = FEATURE_SENSOR_STEP_COUNTER, enforcement = "1")
     fun isHardwareStepCounterEnabled(context: Context): Boolean {
-        Log.d(TAG_NAME, "isHardwareStepCounterEnabled: $FEATURE_SENSOR_STEP_COUNTER")
+        // Log.d(TAG_NAME, "isHardwareStepCounterEnabled: $FEATURE_SENSOR_STEP_COUNTER")
         return context.packageManager.hasSystemFeature(FEATURE_SENSOR_STEP_COUNTER)
     }
 
     @RequiresFeature(name = FEATURE_SENSOR_ACCELEROMETER, enforcement = "1")
     fun isHardwareAccelerometerEnabled(context: Context): Boolean {
-        Log.d(TAG_NAME, "isHardwareStepCounterEnabled: $FEATURE_SENSOR_ACCELEROMETER")
+        // Log.d(TAG_NAME, "isHardwareStepCounterEnabled: $FEATURE_SENSOR_ACCELEROMETER")
         return context.packageManager.hasSystemFeature(FEATURE_SENSOR_ACCELEROMETER)
     }
 }
