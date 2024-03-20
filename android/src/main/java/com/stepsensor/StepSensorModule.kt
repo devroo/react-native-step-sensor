@@ -126,8 +126,7 @@ class StepSensorModule internal constructor(context: ReactApplicationContext) :
      * @param eventName the name of the event. usually "stepSensorUpdate".
      */
     @ReactMethod
-    override fun addListener(eventName: String) {
-    }
+    override fun addListener(eventName: String) {}
 
     /**
      * Keep: Required for RN built in Event Emitter Support.
@@ -135,8 +134,7 @@ class StepSensorModule internal constructor(context: ReactApplicationContext) :
      * not implemented.
      */
     @ReactMethod
-    override fun removeListeners(count: Double) {
-    }
+    override fun removeListeners(count: Double) {}
 
     /**
      * StepSensorPackage requires this property for the module.

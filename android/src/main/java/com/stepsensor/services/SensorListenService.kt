@@ -25,7 +25,7 @@ import com.stepsensor.StepSensorModule
  * @see <a href="https://github.com/facebook/react-native/blob/main/ReactAndroid/src/main/java/com/facebook/react/bridge/LifecycleEventListener.java">LifecycleEventListener: original file</a>
  */
 abstract class SensorListenService(
-    private val counterModule: StepSensorModule, private val sensorManager: SensorManager
+    private val counterModule: StepSensorModule, private val sensorManager: android.hardware.SensorManager
 ) : SensorEventListener, LifecycleEventListener {
     /**
      * the accelerometer sensor type
@@ -85,7 +85,7 @@ abstract class SensorListenService(
      * @see Sensor.TYPE_ACCELEROMETER
      * @see Sensor.TYPE_STEP_COUNTER
      */
-    abstract val detectedSensor: Sensor
+    abstract val detectedSensor: Sensor?
 
     /**
      * the current steps data of the user
@@ -109,14 +109,14 @@ abstract class SensorListenService(
 
     val stepsSensorInfo: WritableMap
         get() = Arguments.createMap().apply {
-            putNumber("minDelay", detectedSensor.minDelay)
-            putNumber("maxDelay", detectedSensor.maxDelay)
-            putString("name", detectedSensor.name)
-            putString("vendor", detectedSensor.vendor)
-            putNumber("power", detectedSensor.power)
-            putNumber("resolution", detectedSensor.resolution)
-            putBoolean("wakeUpSensor", detectedSensor.isWakeUpSensor)
-//            putBoolean("additionalInfoSupported", detectedSensor.isAdditionalInfoSupported)
+            putNumber("minDelay", detectedSensor!!.minDelay)
+            putNumber("maxDelay", detectedSensor!!.maxDelay)
+            putString("name", detectedSensor!!.name)
+            putString("vendor", detectedSensor!!.vendor)
+            putNumber("power", detectedSensor!!.power)
+            putNumber("resolution", detectedSensor!!.resolution)
+            putBoolean("wakeUpSensor", detectedSensor!!.isWakeUpSensor)
+            putBoolean("additionalInfoSupported", detectedSensor!!.isAdditionalInfoSupported)
         }
 
     /**
@@ -209,7 +209,7 @@ abstract class SensorListenService(
      * @see <a href="https://developer.android.com/reference/android/hardware/Sensor#REPORTING_MODE_ON_CHANGE">Reporting Mode On Change</a>
      */
     override fun onSensorChanged(event: SensorEvent?) {
-        if (event?.sensor == null || event.sensor != detectedSensor || event.sensor.type != sensorType || event.sensor.type != detectedSensor.type) {
+        if (event?.sensor == null || event.sensor != detectedSensor || event.sensor.type != sensorType || event.sensor.type != detectedSensor?.type) {
             return
         }
         if (updateCurrentSteps(event.values)) {

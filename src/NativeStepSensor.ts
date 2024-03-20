@@ -23,7 +23,7 @@ export type StepSensorData = {
 };
 
 export const NAME = 'StepSensor';
-export const VERSION = '0.0.16';
+export const VERSION = '0.0.17';
 export const eventName = 'StepSensor.stepSensorUpdate';
 
 export interface Spec extends TurboModule {
